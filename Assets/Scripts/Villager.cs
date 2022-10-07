@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class FoodLabel : MonoBehaviour
+public class Villager : MonoBehaviour
 {
-    [SerializeField] RunTimeData _runtimedata;
-    [SerializeField] TextMeshProUGUI text;
-
+    [SerializeField] string _name;
+    [SerializeField] int _health = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +15,6 @@ public class FoodLabel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        text.text = _runtimedata.CurrentFoodMouseOver;
         
     }
 }

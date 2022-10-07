@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61084184a7222e648a9a67180a431c66, type: 3}
-  m_Name: BurgerCorrect
+  m_Name: BurgerBought
   m_EditorClassIdentifier: 
   NPCFace: {fileID: 2800000, guid: ba2e5e1c784486a45abd82d8a2ecc604, type: 3}
   DialogSlides:
-  - CORRECT
+  - Food Bought

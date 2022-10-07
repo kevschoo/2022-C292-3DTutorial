@@ -1,24 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class FoodLabel : MonoBehaviour
+public class ThrowningObject : MonoBehaviour
 {
-    [SerializeField] RunTimeData _runtimedata;
-    [SerializeField] TextMeshProUGUI text;
+    float _delayDestruction = 5;
+    private float bulletspeed = 50;
 
     // Start is called before the first frame update
     void Start()
     {
+        Destroy(gameObject, _delayDestruction);
         
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-        text.text = _runtimedata.CurrentFoodMouseOver;
         
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
+
 }

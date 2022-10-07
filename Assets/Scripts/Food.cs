@@ -7,7 +7,12 @@ public class Food : MonoBehaviour
 
     float _rotateSpeed = 100f;
     [SerializeField] GameObject _parentQuiz;
-    [SerializeField] RunTimeData _runetimedata;
+    [SerializeField] RunTimeData _runtimedata;
+    [SerializeField] GameObject _FoodBulletPrefab;
+    [SerializeField] int _basedamage = 5;
+    [SerializeField] float _basethrowspeed = 5;
+    [SerializeField] int _cost = 5;
+    [SerializeField] bool _isBought = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +31,11 @@ public class Food : MonoBehaviour
         transform.Find("Spot Light").gameObject.SetActive(true);
         GameObject FoodMesh = transform.Find("FoodMesh").gameObject;
 
-        _runetimedata.CurrentFoodMouseOver = FoodMesh.transform.GetChild(0).gameObject.name;
+        _runtimedata.CurrentFoodMouseOver = FoodMesh.transform.GetChild(0).gameObject.name;
+        _runtimedata.CurrentFoodViewedisBought = _isBought;
+        _runtimedata.CurrentFoodViewedPrice = _cost;
+        _runtimedata.CurrentFoodViewed = _FoodBulletPrefab;
+        _runtimedata.CurrentFoodViewedDamage = _basedamage;
     }
 
     void OnMouseOver()
@@ -37,17 +46,20 @@ public class Food : MonoBehaviour
     void OnMouseExit()
     {
         transform.Find("Spot Light").gameObject.SetActive(false);
-        _runetimedata.CurrentFoodMouseOver = "";
+        _runtimedata.CurrentFoodMouseOver = "";
     }
 
     private void OnMouseDown()
     {
-        if(_runetimedata.CurrentGameplayState == GameplayState.FreeWalk)
+        if(_runtimedata.CurrentGameplayState == GameplayState.FreeWalk)
         {
             StartCoroutine(_parentQuiz.GetComponent<FoodQuiz>().FoodSelected(gameObject));
-            _runetimedata.CurrentFoodMouseOver = "";
+            _runtimedata.CurrentFoodMouseOver = "";
         }
-           
-        
+    }
+
+    public void setBought(bool val)
+    {
+        this._isBought = val;
     }
 }

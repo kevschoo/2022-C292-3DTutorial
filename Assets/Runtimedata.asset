@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070d653dcb8194642a6595d41bd4b4f9, type: 3}
   m_Name: Runtimedata
   m_EditorClassIdentifier: 
+  CurrentFoodViewed: {fileID: 1343256149174145309, guid: befba631688954d46ad729d298f707d2, type: 3}
   CurrentFoodMouseOver: 
+  CurrentFoodViewedPrice: 10
+  CurrentFoodViewedDamage: 10
+  CurrentFoodViewedisBought: 1
+  CurrentFood: {fileID: 1343256149174145309, guid: befba631688954d46ad729d298f707d2, type: 3}
+  CurrentFoodDamage: 10
+  CurrentGameplayState: 1
+  CurrentCash: 30

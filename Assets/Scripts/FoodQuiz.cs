@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class FoodQuiz : MonoBehaviour
 {
+    [SerializeField] RunTimeData _runtimedata;
     [SerializeField] Dialogue _dialogue;
-    [SerializeField] Dialogue _correctDialogue;
-    [SerializeField] Dialogue _incorrectDialogue;
-
-    [SerializeField] GameObject _CorrectFood;
-
+    [SerializeField] Dialogue _FoodBoughtAlready;
+    [SerializeField] Dialogue _FoodTooExpensive;
+    [SerializeField] Dialogue _FoodBought;
 
     // Start is called before the first frame update
     void Start()
@@ -25,22 +24,39 @@ public class FoodQuiz : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameEvents.InvokeDialogueIntiated(_dialogue);
+        if(other.CompareTag("Player"))
+        {
+            GameEvents.InvokeDialogueIntiated(_dialogue);
+        }
+       
     }
 
     public IEnumerator FoodSelected(GameObject food)
     {
         yield return new WaitForEndOfFrame();
 
-        if (food == _CorrectFood)
+        if(_runtimedata.CurrentFoodViewedisBought == false)
         {
-            GameEvents.InvokeDialogueIntiated(_correctDialogue);
+            if (_runtimedata.CurrentCash >= _runtimedata.CurrentFoodViewedPrice)
+            {
+                GameEvents.InvokeDialogueIntiated(_FoodBought);
+                food.GetComponent<Food>().setBought(true);
+                _runtimedata.CurrentCash -= _runtimedata.CurrentFoodViewedPrice;
+                _runtimedata.CurrentFood = _runtimedata.CurrentFoodViewed;
+                _runtimedata.CurrentFoodDamage = _runtimedata.CurrentFoodViewedDamage;
+
+            }
+            else
+            {
+                GameEvents.InvokeDialogueIntiated(_FoodTooExpensive);
+            }
         }
         else
         {
-            GameEvents.InvokeDialogueIntiated(_incorrectDialogue);
+            GameEvents.InvokeDialogueIntiated(_FoodBoughtAlready);
+            _runtimedata.CurrentFood = _runtimedata.CurrentFoodViewed;
+            _runtimedata.CurrentFoodDamage = _runtimedata.CurrentFoodViewedDamage;
         }
-
-        Destroy(food);
+        
     }
 }
